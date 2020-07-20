@@ -5,12 +5,13 @@ import * as sapper from '@sapper/server';
 import json from 'body-parser';
 
 const { PORT, NODE_ENV } = process.env;
+const dev = NODE_ENV === 'development';
 
 polka()
 	.use(json())
 	.use(
 		compression({ threshold: 0 }),
-		sirv('static'),
+		sirv('static', { dev }),
 		sapper.middleware({
 			//store session
 			session: () => ({
@@ -18,6 +19,6 @@ polka()
 			})
 		})
 	)
-	.listen(80, err => {
+	.listen(PORT, err => {
 		if (err) console.log('error', err);
 	});
