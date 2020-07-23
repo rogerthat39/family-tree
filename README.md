@@ -1,9 +1,9 @@
 # Family tree site
-This site uses Svelte and Sapper to create a basic family tree site. The information is stored in an SQLite database.
+This project uses Svelte and Sapper to create a basic family tree site. The information is stored in an SQLite database.
 
 ## How to run
 1. Download the website either by forking the repository or downloading the zip file
-2. Install dependencies using ```npm install```
+2. Install dependencies using ```npm install```. You will need node installed on your computer.
 3. Run the project using ```npm run dev```
 4. The site should be running on [localhost:3000](http://localhost:3000).
 
