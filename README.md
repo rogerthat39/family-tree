@@ -8,10 +8,10 @@ This project uses Svelte and Sapper to create a basic family tree site. The info
 4. The site should be running on [localhost:3000](http://localhost:3000).
 
 ## User passwords
-Currently there is no register page, but there is a user account set up:
+Currently there is one user account in the database:
 ```
-username: amy
-password: pass
+username: newuser
+password: password
 ```
 
-Feel free to create, edit and delete people in the family tree within this user account.
+Feel free to create, edit and delete people in the family tree within this user account (or create your own account).

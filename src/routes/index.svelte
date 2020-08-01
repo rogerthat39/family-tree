@@ -6,6 +6,7 @@
 	<div class="col s12 center-align">
 		<h2>Home page</h2>
 		<p>Welcome to the home screen</p>
-		<a href="/login">Log in to get started</a>
+		<p><a href="/login">Log in to get started</a></p>
+		<p><a href="/register">Create an account here</a></p>
 	</div>
 </div>
