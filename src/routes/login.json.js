@@ -9,8 +9,13 @@ let db = new sqlite3.Database('src/database.db', sqlite3.OPEN_READWRITE, (err) =
 
 export function post(req, res, next) {
 	res.setHeader('Content-Type', 'application/json')
+
 	//get salt of user
 	db.get(`SELECT salt FROM users WHERE username = ?`, req.body.username, (err, result) => {
+		if(err || result == undefined) {
+			return res.end(JSON.stringify({ message: "Incorrect login credentials" }))
+		}
+
 		//calculate hash password
 		let hash = SHA512(result.salt + req.body.password).toString()
 		
