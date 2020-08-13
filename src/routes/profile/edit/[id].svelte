@@ -28,34 +28,37 @@
 
 	async function formSubmit(event) {
 		const id = event.target.id.value
-		var response = await fetch(`/profile/edit/${id}.json`, {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				id: id,
-				user_id: $session.user,
-				first_name: event.target.first_name.value, 
-				last_name: event.target.last_name.value,
-				gender: event.target.gender.value,
-				birth_date: event.target.birth_date.value,
-				death_date: event.target.death_date.value,
-				birth_location: event.target.birth_location.value,
-				death_location: event.target.death_location.value,
-				parent1: event.target.parent1.value,
-				parent2: event.target.parent2.value,
-				marriage: event.target.marriage.value,
-				children: event.target.children.selectedOptions
-			})
-		})
-		var data = await response.json()
-		message = await data.message
 
+		if(event.target.birth_date.value != "" && event.target.death_date.value != ""
+		&& event.target.birth_date.value > event.target.death_date.value) {
+			message = "Death date must be after birth date!"
+		} else {
+			var response = await fetch(`/profile/edit/${id}.json`, {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					id: id,
+					user_id: $session.user,
+					first_name: event.target.first_name.value, 
+					last_name: event.target.last_name.value,
+					gender: event.target.gender.value,
+					birth_date: event.target.birth_date.value,
+					death_date: event.target.death_date.value,
+					birth_location: event.target.birth_location.value,
+					death_location: event.target.death_location.value,
+					parent1: event.target.parent1.value,
+					parent2: event.target.parent2.value,
+					marriage: event.target.marriage.value,
+					children: event.target.children.selectedOptions
+				})
+			})
+			var data = await response.json()
+			message = await data.message
+		}
 		//show message
 		const message_div = document.getElementById("message")
 		message_div.classList.remove("hidden")
 		if(message == "Update successful!") {
-			document.getElementById("person-form").reset()
-			message_div.classList.add("green")
 			//redirect page to /profile/[id]
 			await goto(`/profile/${id}`)
 		} else {
